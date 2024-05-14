@@ -1,0 +1,148 @@
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  5. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  6. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+  7. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/*
+  8. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/*working styles*/
+
+#carousel {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
+  color: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+  z-index: 2;
+  border-radius: 0.5rem;
+}
+
+.carousel-button:hover,
+.carousel-button:focus {
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+#carousel > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.slide[data-active] {
+  opacity: 1;
+}
+
+.slide > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.carousel-button.prev {
+  left: 1rem;
+}
+
+.carousel-button.next {
+  right: 1rem;
+}
+
+.index {
+  display: flex;
+  flex-direction: row;
+  z-index: 2;
+  position: absolute;
+  bottom: 2rem;
+  gap: 2rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
+  border-radius: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.slide-index {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 100%;
+  height: 1rem;
+  width: 1rem;
+  cursor: pointer;
+}
+
+.slide-index[data-active] {
+  background: white;
+}
