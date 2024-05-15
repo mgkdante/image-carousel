@@ -1,36 +1,20 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="index.js" defer></script>
-    <title>Document</title>
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Carousel</title>
+</head>
+<body>
     <div id="carousel" data-carousel>
-      <button class="carousel-button prev" data-carousel-button="prev">
-        &larrtl;
-      </button>
-      <button class="carousel-button next" data-carousel-button="next">
-        &rarrtl;
-      </button>
-      <div class="index" data-pointer-slides></div>
-      <ul data-slides>
-        <li class="slide" data-active>
-          <img src="1.jpg" alt="Space Image #1" />
-        </li>
-        <li class="slide">
-          <img src="2.jpg" alt="Space Image #2" />
-        </li>
-        <li class="slide">
-          <img src="3.jpg" alt="Space Image #3" />
-        </li>
-      </ul>
+        <button class="carousel-button prev" data-carousel-button="prev">&larrtl;</button>
+        <button class="carousel-button next" data-carousel-button="next">&rarr;</button>
+        <div class="slide-indicators"></div> <ul data-slides>
+            <li class="slide active"><img src="1.jpg" alt="Image 1"></li>
+            <li class="slide"><img src="2.jpg" alt="Image 2"></li>
+            <li class="slide"><img src="3.jpg" alt="Image 3"></li>
+        </ul>
     </div>
-  </body>
+    <script src="index.js"></script> </body>
 </html>

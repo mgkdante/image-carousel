@@ -1,39 +1,37 @@
-const buttons = document.querySelectorAll("[data-carousel-button]");
-const sliderPointers = document.querySelector("[data-pointer-slides]");
-const slides = document.querySelector("[data-slides]");
-let newIndex;
+const carousel = document.querySelector("[data-carousel]");
+const slides = document.querySelectorAll(".slide");
+const indicatorsContainer = document.querySelector(".slide-indicators");
+let currentSlide = 0;
 
-[...slides.children].forEach(() => {
-  const sliderPointer = document.createElement("div");
-  sliderPointer.classList.add("slide-index");
-  sliderPointers.appendChild(sliderPointer);
-});
-
-sliderPointers.children[0].setAttribute("data-active", "");
-
-buttons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const offset = button.dataset.carouselButton === "next" ? 1 : -1;
-    const activeSlide = slides.querySelector("[data-active]");
-    const activePointer = sliderPointers.querySelector("[data-active]");
-    newIndex = [...slides.children].indexOf(activeSlide) + offset;
-    if (newIndex < 0) newIndex = slides.children.length - 1;
-    if (newIndex >= slides.children.length) newIndex = 0;
-    slides.children[newIndex].dataset.active = true;
-    sliderPointers.children[newIndex].dataset.active = true;
-    delete activeSlide.dataset.active;
-    delete activePointer.dataset.active;
+function updateCarousel() {
+  slides.forEach((slide, index) => {
+    slide.classList.toggle("active", index === currentSlide);
+    indicatorsContainer.children[index].classList.toggle(
+      "active",
+      index === currentSlide,
+    );
   });
+}
+
+function goToSlide(index) {
+  currentSlide = (index + slides.length) % slides.length;
+  updateCarousel();
+}
+
+carousel.addEventListener("click", (event) => {
+  if (event.target.matches("[data-carousel-button]")) {
+    const direction = event.target.dataset.carouselButton === "next" ? 1 : -1;
+    goToSlide(currentSlide + direction);
+  } else if (event.target.matches(".slide-indicator")) {
+    goToSlide(Array.from(indicatorsContainer.children).indexOf(event.target));
+  }
 });
 
-[...sliderPointers.children].forEach((pointer, index) => {
-  pointer.addEventListener("click", () => {
-    const activeSlide = slides.querySelector("[data-active]");
-    const activePointer = sliderPointers.querySelector("[data-active]");
-    newIndex = index;
-    slides.children[newIndex].dataset.active = true;
-    sliderPointers.children[newIndex].dataset.active = true;
-    delete activeSlide.dataset.active;
-    delete activePointer.dataset.active;
-  });
+slides.forEach((_, index) => {
+  const indicator = document.createElement("div");
+  indicator.classList.add("slide-indicator");
+  indicator.addEventListener("click", () => goToSlide(index));
+  indicatorsContainer.appendChild(indicator);
 });
+
+updateCarousel(); // Initialize
